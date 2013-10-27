@@ -1,3 +1,6 @@
+@import 'susy';
+@import 'compass/typography/vertical_rhythm';
+
 /*
  * HTML5 Boilerplate
  *
@@ -18,11 +21,6 @@ textarea {
     color: #222;
 }
 
-body {
-    font-size: 1em;
-    line-height: 1.4;
-}
-
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
  * These selection declarations have to be separate.
@@ -37,19 +35,6 @@ body {
 ::selection {
     background: #b3d4fc;
     text-shadow: none;
-}
-
-/*
- * A better looking default horizontal rule
- */
-
-hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0;
 }
 
 /*
@@ -90,9 +75,36 @@ textarea {
 }
 
 /* ==========================================================================
-   Author's custom styles
+   Typography
    ========================================================================== */
 
+$base-font-size: 16px;
+$base-line-height: 20px;
+$relative-font-sizing: true;
+
+h1 {
+    @include adjust-font-size-to(32px);
+}
+
+h2 {
+    @include adjust-font-size-to(26px);
+}
+
+
+/* ==========================================================================
+   Grid
+   ========================================================================== */
+
+$total-columns: 12;
+$column-width: 4em;
+$gutter-width: 1em;
+$grid-padding: $gutter-width;
+
+@include establish-baseline;
+
+#wrapper {
+    @include container;
+}
 
 
 
