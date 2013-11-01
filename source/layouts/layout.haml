@@ -31,9 +31,9 @@
           %li.background
             %a{:href => '/background.html'} Background
           %li.new_clients
-            %a{:href => '/new_clients'} New clients
+            %a{:href => '/new_clients.html'} New clients
           %li.contact
-            %a{:href => '/'} Contact
+            %a{:href => '/contact.html'} Contact
 
     - if content_for?(:splash)
       #splash= yield_content(:splash)
@@ -44,7 +44,7 @@
       #secondary_content= yield_content(:secondary_content)
 
     #primary_footer
-      %p All content Copyright &copy; <%= Time.now.year %>. Handmade in Portland, Oregon by <a href="http://foliosus.com">Foliosus Web Design</a>.
+      %p All content Copyright &copy; #{Time.now.year}. Handmade in Portland, Oregon by <a href="http://foliosus.com">Foliosus Web Design</a>.
 
     %script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"}
     / %script{:src => "/js/vendor/jquery-1.8.0.min.js"}
