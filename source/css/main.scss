@@ -113,13 +113,13 @@ h1 {
 }
 
 h2 {
-  @include adjust-font-size-to(24px);
+  @include adjust-font-size-to(25px);
   @include margin-trailer(0);
   font-weight: bold;
 }
 
 h3 {
-  @include adjust-font-size-to(22px);
+  @include adjust-font-size-to(20px);
   @include margin-trailer(0);
   font-weight: bold;
 }
@@ -186,13 +186,14 @@ body {
   color: #fff;
   border-top: 4px solid $link_hover_color;
   h1 {
-    @include adjust-font-size-to(24px);
+    @include adjust-font-size-to(25px);
     text-shadow: 2px 2px 0px #222;
   }
   h2 {
     @include adjust-font-size-to(16px);
     @include body-font;
     text-shadow: 1px 1px 0px #222;
+    font-weight: normal;
   }
 }
 
@@ -219,7 +220,7 @@ body {
         @include padding-trailer(0.5);
       }
       a:link, a:visited {
-        color: lighten($link_color, 10%);
+        color: lighten($link_color, 22%);
       }
       a:hover {
         color: $link_hover_color;
@@ -240,6 +241,7 @@ body {
 #primary_content {
   border-top: 1px solid $frame_color;
   background-color: #fff;
+  @include padding-leader(0.5);
 }
 
 #primary_footer {
@@ -278,6 +280,12 @@ body {
   .teaser {
     @include span-columns(6);
     @include nth-omega(2n);
+  }
+}
+
+body.background #primary_content {
+  li {
+    margin-bottom: 0;
   }
 }
 
