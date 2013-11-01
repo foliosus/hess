@@ -283,6 +283,16 @@ body.index #primary_content {
       @include nth-omega(2n);
     }
   }
+  .highlight {
+    border: 1px solid $primary_color;
+    background-color: #eee;
+    padding: $base-line-height - 1;
+    margin-bottom: $base-line-height;
+    @include adjust-font-size-to(20px);
+    :last-child {
+      margin-bottom: 0;
+    }
+  }
 }
 
 body.background #primary_content {
