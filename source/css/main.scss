@@ -1,9 +1,19 @@
 @import 'susy';
 @import 'compass/reset';
 @import 'compass/typography/vertical_rhythm';
+@import 'compass/css3/border-radius';
+@import 'compass/css3/box-shadow';
+@import 'compass/css3/text-shadow';
 
 $font-color: #444;
 $highlight-color: #b3d4fc; // pale blue
+$primary_color: #dbe3f9;
+$secondary_color: #febe89;
+$tertiary_color: #d8f6b5;
+$frame_color: #aaa;
+$link_color: darken($primary_color, 30%);
+$link_hover_color: darken($secondary_color, 30%);
+
 
 $base-font-size: 16px;
 $base-line-height: 24px;
@@ -80,12 +90,20 @@ textarea {
 
 // Web fonts from http://www.google.com/fonts#UsePlace:use/Collection:Rokkitt:400,700|Raleway:600
 
-body {
+@mixin body_font {
   font-family: 'Rokkitt', 'Georgia', 'serif';
 }
 
-h1, h2, h3 {
+@mixin heading_font {
   font-family: 'Raleway', 'Helvetica', 'Helvetica Neue', 'Arial', sans-serif;
+}
+
+body {
+  @include body_font;
+}
+
+h1, h2, h3 {
+  @include heading_font;
 }
 
 h1 {
@@ -116,23 +134,152 @@ ul, ol, p {
   @include margin-trailer(1);
 }
 
+li {
+  @include margin-trailer(1);
+}
+
+strong {
+  font-weight: bold;
+}
+
+a {
+  border-bottom: 1px solid;
+  text-decoration: none;
+}
+
+a:link, a:visited {
+  color: $link_color;
+}
+
+a:hover {
+  color: $link_hover_color;
+}
 
 
 /* ==========================================================================
- Grid
+ Grid & page structure
  ========================================================================== */
 
 $total-columns: 12;
 $column-width: 4em;
-$gutter-width: 1em;
+$gutter-width: 1.5em;
 $grid-padding: $gutter-width;
+$border-radius: 3px;
 
 @include establish-baseline;
 
-#wrapper {
+#primary_header, #splash, #primary_content, #secondary_content, #primary_footer {
   @include container;
+  border-left: 1px solid $frame_color;
+  border-right: 1px solid $frame_color;
+  @include at-breakpoint(50em 12) {
+    @include container;
+  }
 }
 
+body {
+  background: url(/img/layout/fresh_snow.jpg);
+}
+
+#primary_header {
+  @include background-image(linear-gradient(#444858 60%, darken(#444858, 5%) 95%));
+  color: #fff;
+  border-top: 4px solid $link_hover_color;
+  h1 {
+    @include adjust-font-size-to(24px);
+    text-shadow: 2px 2px 0px #222;
+  }
+  h2 {
+    @include adjust-font-size-to(16px);
+    @include body-font;
+    text-shadow: 1px 1px 0px #222;
+  }
+}
+
+#primary_navigation {
+  @include heading-font;
+  padding-left: 0;
+  padding-right: 0;
+  ul {
+    @include margin-leader(0.5);
+    @include margin-trailer(0);
+    display: table;
+    width: 100%;
+    li {
+      width: 25%;
+      margin-bottom: 0;
+      text-align: center;
+      display: table-cell;
+      vertical-align: middle;
+      a {
+        display: block;
+        border-bottom: none;
+        text-shadow: 1px 1px 0 #333;
+        @include padding-leader(0.5);
+        @include padding-trailer(0.5);
+      }
+      a:link, a:visited {
+        color: lighten($link_color, 10%);
+      }
+      a:hover {
+        color: $link_hover_color;
+      }
+      .index &.index,
+      .background &.background,
+      .new_clients &.new_clients,
+      .contact &.contact {
+        a {
+          color: #fff;
+          cursor: default;
+        }
+      }
+    }
+  }
+}
+
+#primary_content {
+  border-top: 1px solid $frame_color;
+  background-color: #fff;
+}
+
+#primary_footer {
+  border-top: 1px solid $frame_color;
+  border-bottom: 1px solid $frame_color;
+  @include padding-leader(1);
+  color: #888;
+  background-color: lighten($secondary_color, 20%);
+  text-align: center;
+  a, a:link, a:visited {
+    color: lighten($link_color, 15%);
+  }
+  a:hover {
+    color: $link_hover_color;
+  }
+}
+
+/* ==========================================================================
+ Custom
+ ========================================================================== */
+
+#splash {
+  text-align: center;
+  @include padding-leader(1);
+  @include padding-trailer(1);
+  background-color: $primary_color;
+  border-top: 1px solid $frame_color;
+  @include single-box-shadow(rgba(0,0,0, 0.07), 0, 0, 13px, 6px, inset);
+  iframe {
+    border: 1px solid $font-color;
+    margin: 0 auto;
+  }
+}
+
+#teasers {
+  .teaser {
+    @include span-columns(6);
+    @include nth-omega(2n);
+  }
+}
 
 /* ==========================================================================
  Helper classes
