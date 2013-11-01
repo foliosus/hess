@@ -276,10 +276,12 @@ body {
   }
 }
 
-#teasers {
-  .teaser {
-    @include span-columns(6);
-    @include nth-omega(2n);
+body.index #primary_content {
+  #teasers {
+    .teaser {
+      @include span-columns(6);
+      @include nth-omega(2n);
+    }
   }
 }
 
@@ -288,6 +290,40 @@ body.background #primary_content {
     margin-bottom: 0;
   }
 }
+
+body.contact #primary_content {
+  .address, .email {
+    @include span-columns(6);
+    @include nth-omega(2n);
+  }
+  li {
+    margin-bottom: 0;
+  }
+}
+
+/* ==========================================================================
+ Helper classes
+ ========================================================================== */
+
+form {
+  @include margin-trailer(1);
+  @include span-columns(6);
+
+  label {
+    display: block;
+    width: 100%;
+  }
+
+  input, select, textarea {
+    display: block;
+    width: 100%;
+  }
+
+  textarea {
+    height: $base-line-height * 6;
+  }
+}
+
 
 /* ==========================================================================
  Helper classes
