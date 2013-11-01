@@ -286,6 +286,11 @@ body.index #primary_content {
 }
 
 body.background #primary_content {
+  .column {
+    @include span-columns(6);
+    @include nth-omega(2n);
+  }
+  
   li {
     margin-bottom: 0;
   }
