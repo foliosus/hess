@@ -186,7 +186,7 @@ body {
   color: #fff;
   border-top: 4px solid $link_hover_color;
   h1 {
-    @include adjust-font-size-to(25px);
+    @include adjust-font-size-to(32px);
     text-shadow: 2px 2px 0px #222;
   }
   h2 {
@@ -290,7 +290,7 @@ body.background #primary_content {
     @include span-columns(6);
     @include nth-omega(2n);
   }
-  
+
   li {
     margin-bottom: 0;
   }
