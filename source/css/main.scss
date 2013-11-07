@@ -1,21 +1,22 @@
-@import 'susy';
 @import 'compass/reset';
 @import 'compass/typography/vertical_rhythm';
 @import 'compass/css3/border-radius';
 @import 'compass/css3/box-shadow';
 @import 'compass/css3/text-shadow';
+@import "compass/utilities/general/clearfix";
 
 $font-color: #444;
 $highlight-color: #b3d4fc; // pale blue
 $primary_color: #dbe3f9;
 $secondary_color: #febe89;
 $tertiary_color: #d8f6b5;
+$header_color: #383f5c;
 $frame_color: #aaa;
 $link_color: darken($primary_color, 30%);
 $link_hover_color: darken($secondary_color, 30%);
 
 
-$base-font-size: 16px;
+$base-font-size: 18px;
 $base-line-height: 24px;
 $relative-font-sizing: true;
 
@@ -107,25 +108,25 @@ h1, h2, h3 {
 }
 
 h1 {
-  @include adjust-font-size-to(32px);
+  @include adjust-font-size-to(40px);
   @include margin-trailer(0);
   font-weight: bold;
 }
 
 h2 {
-  @include adjust-font-size-to(25px);
+  @include adjust-font-size-to(32px);
   @include margin-trailer(0);
   font-weight: bold;
 }
 
 h3 {
-  @include adjust-font-size-to(20px);
+  @include adjust-font-size-to(24px);
   @include margin-trailer(0);
   font-weight: bold;
 }
 
 h4 {
-  @include adjust-font-size-to(16px);
+  @include adjust-font-size-to(18px);
   @include margin-trailer(0);
   font-weight: bold;
 }
@@ -160,21 +161,99 @@ a:hover {
  Grid & page structure
  ========================================================================== */
 
-$total-columns: 12;
-$column-width: 4em;
-$gutter-width: 1.5em;
-$grid-padding: $gutter-width;
-$border-radius: 3px;
+$gutter: 40px;
 
 @include establish-baseline;
 
+.grid-1, .grid-2, .grid-3, .grid-4, .grid-5, .grid-6, .grid-7, .grid-8, .grid-9, .grid-10, .grid-11, .grid-12 {
+  display:inline;
+  float: left;
+  margin-left: $gutter/2;
+  margin-right: $gutter/2;
+}
+.alpha {
+  margin-left: 0;
+}
+.omega {
+  margin-right: 0;
+}
+.beta {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+$column_width: 100px;
+.container-12 {
+  @include clearfix;
+  margin: 0 auto;
+  width: 12 * $column_width;
+}
+@for $i from 1 through 12 {
+  .container-12 .grid-#{$i} {
+    width: $i * $column_width - $gutter;
+  }
+}
+
+
+$column_width: 80px;
+@media only screen and (min-width: 960px) and (max-width: 1199px) {
+  .container-12 {
+    width: 12 * $column_width;
+  }
+  @for $i from 1 through 12 {
+    .container-12 .grid-#{$i} {
+      width: $i * $column_width - $gutter;
+    }
+  }
+}
+
+$column_width: 60px;
+@media only screen and (min-width: 720px) and (max-width: 959px) {
+  .container-12 {
+    width: 12 * $column_width;
+  }
+  @for $i from 1 through 12 {
+    .container-12 .grid-#{$i} {
+      width: $i * $column_width - $gutter;
+    }
+  }
+
+}
+
+@media only screen and (max-width: 719px) {
+  .container-12 {
+    width: 90%;
+    padding-left: 3%;
+    padding-right: 3%;
+  }
+  .grid-1, .grid-2, .grid-3, .grid-4, .grid-5, .grid-6, .grid-7, .grid-8, .grid-9, .grid-10, .grid-11, .grid-12, .grid-13, .grid-14, .grid-15, .grid-16 {
+    width:100%;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .alpha {
+    margin-left: 0;
+  }
+  .omega {
+    margin-right: 0;
+  }
+  .beta {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .container-12 .grid-1, .container-12 .grid-2, .container-12 .grid-3, .container-12 .grid-4, .container-12 .grid-5, .container-12 .grid-6, .container-12 .grid-7, .container-12 .grid-8, .container-12 .grid-9, .container-12 .grid-10, .container-12 .grid-11, .container-12 .grid-12 {
+    width:100%;
+  }
+}
+
+img.scale, img.responsive {
+  max-width: 100%;
+  height: auto;
+}
+
 #primary_header, #splash, #primary_content, #secondary_content, #primary_footer {
-  @include container;
   border-left: 1px solid $frame_color;
   border-right: 1px solid $frame_color;
-  @include at-breakpoint(50em 12) {
-    @include container;
-  }
 }
 
 body {
@@ -182,7 +261,7 @@ body {
 }
 
 #primary_header {
-  @include background-image(linear-gradient(#444858 60%, darken(#444858, 5%) 95%));
+  @include background-image(linear-gradient($header_color 60%, darken($header_color, 5%) 95%));
   color: #fff;
   border-top: 4px solid $link_hover_color;
   h1 {
@@ -245,6 +324,7 @@ body {
 }
 
 #primary_footer {
+  @include adjust-font-size-to(16px);
   border-top: 1px solid $frame_color;
   border-bottom: 1px solid $frame_color;
   @include padding-leader(1);
@@ -277,12 +357,6 @@ body {
 }
 
 body.index #primary_content {
-  #teasers {
-    .teaser {
-      @include span-columns(6);
-      @include nth-omega(2n);
-    }
-  }
   .highlight {
     border: 1px solid $primary_color;
     background-color: #eee;
@@ -296,21 +370,14 @@ body.index #primary_content {
 }
 
 body.background #primary_content {
-  .column {
-    @include span-columns(6);
-    @include nth-omega(2n);
-  }
-
   li {
     margin-bottom: 0;
+    text-indent: -2em;
+    margin-left: 2em;
   }
 }
 
 body.contact #primary_content {
-  .address, .email {
-    @include span-columns(6);
-    @include nth-omega(2n);
-  }
   li {
     margin-bottom: 0;
   }
@@ -322,16 +389,37 @@ body.contact #primary_content {
 
 form {
   @include margin-trailer(1);
-  @include span-columns(6);
 
   label {
+    @include adjust-font-size-to(24px);
     display: block;
     width: 100%;
   }
 
   input, select, textarea {
+    @include adjust-font-size-to($base-font-size);
     display: block;
     width: 100%;
+    border: 1px solid $primary_color;
+    background-color: lighten($primary_color, 6%);
+    color: $header_color;
+  }
+
+  input[type=submit] {
+    width: auto;
+    padding-left: 3em;
+    padding-right: 3em;
+    @include padding-leader(1);
+    @include padding-trailer(1);
+    background-color: darken($header_color, 10%);
+    color: #fff;
+    text-shadow: 1px 1px 0 $header_color;
+    border: 1px solid #222;
+    @include border-radius(3px);
+    &:hover {
+      border-color: darken($secondary_color, 25%);
+      @include background-image(linear-gradient(darken($secondary_color, 10%) 60%, darken($secondary_color, 15%) 95%));
+    }
   }
 
   textarea {

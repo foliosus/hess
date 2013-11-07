@@ -22,9 +22,9 @@
   %body{:class => page_classes}
     /[if lt IE 7] <p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p>
 
-    %header#primary_header
-      %h1 Marc Hess, licensed therapist
-      %h2 Individual counseling, couples counseling, anger management, and trauma counseling
+    %header#primary_header.container-12
+      %h1.grid-12 Marc Hess, licensed therapist
+      %h2.grid-12 Individual counseling, couples counseling, anger management, and trauma counseling
       %nav#primary_navigation
         %ul
           %li.index
@@ -37,14 +37,14 @@
             %a{:href => '/contact.php'} Contact
 
     - if content_for?(:splash)
-      #splash= yield_content(:splash)
+      #splash.container-12= yield_content(:splash)
 
-    #primary_content= yield
+    #primary_content.container-12= yield
 
     - if content_for?(:secondary_content)
-      #secondary_content= yield_content(:secondary_content)
+      #secondary_content.container-12= yield_content(:secondary_content)
 
-    #primary_footer
+    #primary_footer.container-12
       %p All content Copyright &copy; #{Time.now.year}. Handmade in Portland, Oregon by <a href="http://foliosus.com">Foliosus Web Design</a>.
 
     %script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"}
